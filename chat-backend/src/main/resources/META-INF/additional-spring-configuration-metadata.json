@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "logging.level[net.talaatharb]",
+    "type": "java.lang.String",
+    "description": "Logging level for project components"
+  },
+  {
+    "name": "spring.jackson.mapper[DEFAULT_VIEW_INCLUSION]",
+    "type": "java.lang.Boolean",
+    "description": "A description for 'spring.jackson.mapper[DEFAULT_VIEW_INCLUSION]'"
+  },
+  {
+    "name": "logging.level[org.springframework.web]",
+    "type": "java.lang.String",
+    "description": "Logging level for spring-web components"
+  },
+  {
+    "name": "rabbit.broadcast",
+    "type": "java.lang.Boolean",
+    "description": "Is Rabbit broadcast enabled"
+  }
+]}
