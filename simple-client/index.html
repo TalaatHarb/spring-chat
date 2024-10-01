@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOMP WebSocket</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+
+<body>
+    <h1>WebSocket Messages</h1>
+    <ul id="messageList"></ul>
+
+    <script>
+        // Create WebSocket connection
+        const socket = new SockJS('/ws');
+        const stompClient = Stomp.over(socket);
+
+        // On connection, subscribe to the topic
+        stompClient.connect({}, function () {
+            stompClient.subscribe('/topic/messages', function (message) {
+                showMessage(message.body);
+            });
+        });
+
+        // Function to append new messages to the UI
+        function showMessage(message) {
+            const messageList = document.getElementById('messageList');
+            const li = document.createElement('li');
+            li.textContent = message;
+            messageList.appendChild(li);
+        }
+    </script>
+</body>
+
+</html>
