@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class MessageRequest {
 	private UUID id;
+	private UUID senderId;
     private String content;
 }
 

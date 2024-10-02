@@ -21,5 +21,8 @@ public class MessageEntity {
 	@Column(name = "id", columnDefinition = "uuid", updatable = false, nullable = false)
 	private UUID id;
 	
+	@Column(length = 2047)
 	private String content;
+	
+	private UUID senderId;
 }
