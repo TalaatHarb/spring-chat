@@ -10,15 +10,20 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    @Override
+    private static final String WS_ENDPOINT = "/ws";
+	private static final String APP_PREFIX = "/app";
+	private static final String TOPIC = "/topic";
+	public static final String TOPIC_MESSAGES = "/topic/messages";
+
+	@Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic"); // In-memory broker for WebSocket communication
-        config.setApplicationDestinationPrefixes("/app");
+        config.enableSimpleBroker(TOPIC);
+        config.setApplicationDestinationPrefixes(APP_PREFIX);
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").withSockJS(); // WebSocket endpoint for STOMP clients
+        registry.addEndpoint(WS_ENDPOINT).setAllowedOrigins("http://127.0.0.1:5500/").withSockJS();
     }
 }
 

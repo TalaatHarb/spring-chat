@@ -28,13 +28,13 @@
 
     <script>
         // Create WebSocket connection to the backend running on localhost:8080
-        const socket = new SockJS('http://localhost:8080/ws'); // Backend WebSocket endpoint
+        const socket = new SockJS('http://localhost:8080/chat/ws'); // Backend WebSocket endpoint
         const stompClient = Stomp.over(socket);
 
         // Connect to WebSocket and subscribe to topic
         stompClient.connect({}, function () {
-            stompClient.subscribe('/chat/topic/messages', function (message) {
-                showMessage(message.body);
+            stompClient.subscribe('/topic/messages', function (message) {
+                showMessage(JSON.parse(message.body).content);
             });
         });
 

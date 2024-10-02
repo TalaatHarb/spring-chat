@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.talaatharb.chat.config.WebSocketConfig;
 import net.talaatharb.chat.dto.MessageRequest;
 
 @Slf4j
@@ -18,8 +19,8 @@ public class DirectMessagingBroadcastService implements MessageBroadcastService 
 
 	@Override
 	public void broadcast(MessageRequest message) {
-		log.info("Broadcasting Message: {}", message.toString());
-		messagingTemplate.convertAndSend("/topic/messages", message);
+		log.debug("Broadcasting Message: {}", message.toString());
+		messagingTemplate.convertAndSend(WebSocketConfig.TOPIC_MESSAGES, message);
 	}
 
 }

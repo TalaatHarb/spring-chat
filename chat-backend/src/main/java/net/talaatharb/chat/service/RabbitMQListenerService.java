@@ -6,8 +6,11 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.chat.config.RabbitMQConfig;
+import net.talaatharb.chat.config.WebSocketConfig;
 
+@Slf4j
 @ConditionalOnProperty(name = {"rabbit.broadcast"}, havingValue = "true")
 @RequiredArgsConstructor
 @Service
@@ -17,7 +20,8 @@ public class RabbitMQListenerService {
 
     @RabbitListener(queues = RabbitMQConfig.MESSAGE_QUEUE)
     public void receiveMessage(String message) {
-        messagingTemplate.convertAndSend("/topic/messages", message);
+    	log.debug("Received message: {}", message);
+        messagingTemplate.convertAndSend(WebSocketConfig.TOPIC_MESSAGES, message);
     }
 }
 
